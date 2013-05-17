@@ -27,6 +27,7 @@ class Root(resource.Resource):
         if self.default_child:
             return self.default_child
         return self
+        
     def render(self, request, **kwargs):
         request.setResponseCode(404)
         return "No default service"
