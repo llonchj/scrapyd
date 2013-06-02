@@ -21,8 +21,16 @@ class FrontEnd(resource.Resource):
     
     def __init__(self, root, path=None, **kwargs):
         self.root = root
-        self.path = (path or posixpath.expanduser(self.root.config.get("htdocs_dir")) or 
+        htdocs_dir = self.root.config.get("htdocs_dir")
+        if htdocs_dir:
+            if htdocs_dir.strip() == "":
+                htdocs_dir = None
+            else:
+                htdocs_dir = posixpath.expanduser(htdocs_dir)
+        print htdocs_dir
+        self.path = (path or htdocs_dir or 
             pkg_resources.resource_filename("scrapyd", "frontend/site"))
+        print self.path
         resource.Resource.__init__(self, **kwargs)
 
     def render(self, request, **kwargs):
