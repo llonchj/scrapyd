@@ -2,6 +2,8 @@ import traceback
 import uuid
 from cStringIO import StringIO
 
+from twisted.python import log
+
 from scrapy.utils.txweb import JsonResource
 from scrapyd.utils import get_spider_list
 
